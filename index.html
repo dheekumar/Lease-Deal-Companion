@@ -33,7 +33,7 @@
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0;
-    overflow-x: clip; /* defensive: catch any horizontal overflow */
+    overflow-x: clip;
   }
   body {
     font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -45,12 +45,10 @@
   .app {
     max-width: 480px;
     margin: 0 auto;
-    /* Use safe-area insets so content stays inside the rounded notched edges */
     padding: 12px max(14px, env(safe-area-inset-right)) 24px max(14px, env(safe-area-inset-left));
     min-width: 0;
   }
   header.top {
-    /* not sticky — let it scroll away so the monthly box can pin to the very top */
     padding: 10px 0 14px;
   }
   .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
@@ -70,7 +68,7 @@
     border-radius: var(--radius); box-shadow: var(--shadow);
     padding: 14px; margin-top: 12px;
     min-width: 0;
-    overflow: hidden; /* prevent any child from pushing past the rounded corners */
+    overflow: hidden;
   }
   .card h2 {
     margin: 0 0 4px; font-size: 14px; letter-spacing: .02em;
@@ -79,9 +77,6 @@
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
-  /* CRITICAL: grid items need explicit min-width: 0 to shrink below their
-     intrinsic content size on narrow viewports. Without this, .field
-     refuses to shrink and pushes its input past the card edge on small iPhones. */
   .field {
     display: flex; flex-direction: column; gap: 4px;
     min-width: 0;
@@ -100,9 +95,9 @@
     background: #f9fafb; border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     transition: border-color .12s, background .12s;
-    min-width: 0;        /* let the wrap shrink to fit its grid cell */
-    max-width: 100%;     /* never exceed parent */
-    overflow: hidden;    /* clip any rounding/sub-pixel artifacts */
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
   }
   .input-wrap:focus-within {
     border-color: var(--accent); background: #fff;
@@ -122,9 +117,6 @@
     border: 0; background: transparent;
     padding: 10px 10px 10px 6px;
     font: inherit; color: var(--ink); outline: none;
-    /* iOS sometimes ignores font-size < 16px and zooms the page on focus.
-       Below 16px is fine here because we set maximum-scale=1 in the viewport,
-       but we explicitly opt-in to keep iOS from auto-zooming. */
   }
   .input-wrap.has-prefix input { padding-left: 0; }
   .input-wrap select { padding-right: 28px; cursor: pointer; }
@@ -134,12 +126,9 @@
   }
 
   .monthly-summary {
-    /* Pin to the very top of the viewport while scrolling. No fade/transparency
-       so nothing from above can be seen behind it. */
-    position: sticky; top: 0; z-index: 20;
     background: linear-gradient(135deg, #0e1116 0%, #1f2937 100%);
     color: #fff; border-radius: var(--radius);
-    padding: 14px 16px; margin-top: 8px;
+    padding: 14px 16px;
     box-shadow: 0 8px 24px rgba(15,23,42,.28);
     min-width: 0;
   }
@@ -404,9 +393,89 @@
   }
   .summary-strip .stat .v { font-weight: 800; font-size: 16px; }
   .summary-strip .stat .k { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; font-weight: 700; margin-top: 1px; }
+
+  /* === SUB-TAB SYSTEM (inside the Calculator tab) === */
+  .sticky-top-group {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bg);
+    padding: 8px 0 6px;
+    margin-top: -8px;
+  }
+  .subtabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    background: #e5e7eb;
+    padding: 4px;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+  .subtab {
+    appearance: none; border: 0; background: transparent;
+    padding: 8px 4px;
+    border-radius: 8px;
+    font: inherit; font-weight: 600; font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    min-width: 0;
+    transition: background .12s, color .12s, box-shadow .12s, transform .05s;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .subtab:active { transform: scale(.97); }
+  .subtab.active {
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 1px 3px rgba(15,23,42,.08), 0 1px 1px rgba(15,23,42,.04);
+  }
+  .subtab .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--good);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px #fff;
+  }
+  .subtab:not(.active) .dot { box-shadow: 0 0 0 2px #e5e7eb; }
+  .subtab .dot[hidden] { display: none; }
+
+  .subtab-pane { display: none; }
+  .subtab-pane.active { display: block; }
+
+  /* Floating Save / Clear bar — visible only when the Calculator tab is active. */
+  .calc-actions {
+    display: none;
+    position: fixed;
+    left: 0; right: 0;
+    bottom: calc(58px + env(safe-area-inset-bottom));
+    padding: 0 max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+    z-index: 25;
+    pointer-events: none;
+  }
+  body.calc-active .calc-actions { display: block; }
+  body.calc-active { padding-bottom: 140px; }
+  .calc-actions::before {
+    content: '';
+    position: absolute;
+    inset: -28px 0 -8px 0;
+    background: linear-gradient(to top, var(--bg) 35%, rgba(245,246,248,0));
+    pointer-events: none;
+    z-index: -1;
+  }
+  .calc-actions-inner {
+    pointer-events: auto;
+    max-width: 480px; margin: 0 auto;
+    display: flex; gap: 8px;
+  }
+  .calc-actions .btn {
+    flex: 1 1 0; min-width: 0;
+  }
+  .calc-actions .btn-primary { box-shadow: 0 8px 22px rgba(30,111,255,.35); }
+  .calc-actions .btn-ghost { box-shadow: 0 6px 16px rgba(15,23,42,.10); }
 </style>
 </head>
-<body>
+<body class="calc-active">
 <div class="app">
 
   <header class="top">
@@ -414,182 +483,182 @@
       <div class="brand-logo">L</div>
       <div>
         <div class="brand-name">Lease Deal Companion</div>
-        <div class="brand-sub">Get in! It's just Math</div>
+        <div class="brand-sub">Tap-friendly · works at the dealer</div>
       </div>
     </div>
   </header>
 
   <!-- CALC TAB -->
   <section id="tab-calc" class="tab-pane active">
-    <div class="monthly-summary">
-      <div class="row">
-        <div>
-          <div class="lbl">Estimated monthly</div>
-          <div class="num" id="est-monthly">$—</div>
+    <div class="sticky-top-group">
+      <div class="monthly-summary">
+        <div class="row">
+          <div>
+            <div class="lbl">Estimated monthly</div>
+            <div class="num" id="est-monthly">$—</div>
+          </div>
+          <div style="text-align:right">
+            <div class="lbl">APR equiv</div>
+            <div style="font-weight:700;font-size:16px" id="est-apr">—</div>
+          </div>
         </div>
-        <div style="text-align:right">
-          <div class="lbl">APR equiv</div>
-          <div style="font-weight:700;font-size:16px" id="est-apr">—</div>
+        <div class="breakdown">
+          <div><div class="k">Depreciation</div><div class="v" id="bd-dep">—</div></div>
+          <div><div class="k">Rent charge</div><div class="v" id="bd-rent">—</div></div>
+          <div><div class="k">Tax</div><div class="v" id="bd-tax">—</div></div>
         </div>
       </div>
-      <div class="breakdown">
-        <div><div class="k">Depreciation</div><div class="v" id="bd-dep">—</div></div>
-        <div><div class="k">Rent charge</div><div class="v" id="bd-rent">—</div></div>
-        <div><div class="k">Tax</div><div class="v" id="bd-tax">—</div></div>
+      <div class="subtabs" role="tablist">
+        <button type="button" class="subtab active" data-sub="vehicle" role="tab">Vehicle<span class="dot" hidden></span></button>
+        <button type="button" class="subtab" data-sub="terms" role="tab">Terms<span class="dot" hidden></span></button>
+        <button type="button" class="subtab" data-sub="cash" role="tab">Cash<span class="dot" hidden></span></button>
+        <button type="button" class="subtab" data-sub="review" role="tab">Review</button>
       </div>
     </div>
 
-    <div class="card">
-      <div class="section-row">
-        <div class="section-title">The vehicle</div>
-        <div class="section-meta">step 1</div>
-      </div>
-      <div class="field">
-        <label>Vehicle / nickname <button class="help-btn" data-help="nickname">?</button></label>
-        <div class="input-wrap"><input id="f-name" type="text" placeholder="e.g. RAV4 Hybrid XLE" autocomplete="off"></div>
-      </div>
-      <div class="field" style="margin-top:8px">
-        <label>Dealer (optional)</label>
-        <div class="input-wrap"><input id="f-dealer" type="text" placeholder="e.g. Hudson Toyota" autocomplete="off"></div>
-      </div>
-      <div class="grid-2" style="margin-top:8px">
+    <div class="subtab-pane active" data-sub="vehicle">
+      <div class="card">
         <div class="field">
-          <label>MSRP <button class="help-btn" data-help="msrp">?</button></label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-msrp" type="text" inputmode="decimal" placeholder="40,000"></div>
+          <label>Vehicle / nickname <button class="help-btn" data-help="nickname">?</button></label>
+          <div class="input-wrap"><input id="f-name" type="text" placeholder="e.g. RAV4 Hybrid XLE" autocomplete="off"></div>
         </div>
-        <div class="field">
-          <label>Selling price <button class="help-btn" data-help="sellingPrice">?</button></label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-sell" type="text" inputmode="decimal" placeholder="37,500"></div>
+        <div class="field" style="margin-top:8px">
+          <label>Dealer (optional)</label>
+          <div class="input-wrap"><input id="f-dealer" type="text" placeholder="e.g. Hudson Toyota" autocomplete="off"></div>
         </div>
+        <div class="grid-2" style="margin-top:8px">
+          <div class="field">
+            <label>MSRP <button class="help-btn" data-help="msrp">?</button></label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-msrp" type="text" inputmode="decimal" placeholder="40,000"></div>
+          </div>
+          <div class="field">
+            <label>Selling price <button class="help-btn" data-help="sellingPrice">?</button></label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-sell" type="text" inputmode="decimal" placeholder="37,500"></div>
+          </div>
+        </div>
+        <div class="hint" id="discount-hint">—</div>
       </div>
-      <div class="hint" id="discount-hint">—</div>
+      <div class="footer-actions" style="justify-content:center; margin-top:8px">
+        <button class="link-btn" id="btn-load-sample">Load example numbers</button>
+      </div>
     </div>
 
-    <div class="card">
-      <div class="section-row">
-        <div class="section-title">The lease terms</div>
-        <div class="section-meta">step 2</div>
-      </div>
-      <div class="grid-3">
-        <div class="field">
-          <label>Term <button class="help-btn" data-help="term">?</button></label>
-          <div class="input-wrap select-wrap">
-            <select id="f-term">
-              <option value="24">24 mo</option>
-              <option value="27">27 mo</option>
-              <option value="36" selected>36 mo</option>
-              <option value="39">39 mo</option>
-              <option value="42">42 mo</option>
-              <option value="48">48 mo</option>
-            </select>
+    <div class="subtab-pane" data-sub="terms">
+      <div class="card">
+        <div class="grid-3">
+          <div class="field">
+            <label>Term <button class="help-btn" data-help="term">?</button></label>
+            <div class="input-wrap select-wrap">
+              <select id="f-term">
+                <option value="24">24 mo</option>
+                <option value="27">27 mo</option>
+                <option value="36" selected>36 mo</option>
+                <option value="39">39 mo</option>
+                <option value="42">42 mo</option>
+                <option value="48">48 mo</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Miles/yr <button class="help-btn" data-help="miles">?</button></label>
+            <div class="input-wrap select-wrap">
+              <select id="f-miles">
+                <option value="7500">7,500</option>
+                <option value="10000" selected>10,000</option>
+                <option value="12000">12,000</option>
+                <option value="15000">15,000</option>
+                <option value="18000">18,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tax % <button class="help-btn" data-help="tax">?</button></label>
+            <div class="input-wrap"><input id="f-tax" type="text" inputmode="decimal" placeholder="6.875"><span class="suffix">%</span></div>
           </div>
         </div>
-        <div class="field">
-          <label>Miles/yr <button class="help-btn" data-help="miles">?</button></label>
-          <div class="input-wrap select-wrap">
-            <select id="f-miles">
-              <option value="7500">7,500</option>
-              <option value="10000" selected>10,000</option>
-              <option value="12000">12,000</option>
-              <option value="15000">15,000</option>
-              <option value="18000">18,000</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label>Tax % <button class="help-btn" data-help="tax">?</button></label>
-          <div class="input-wrap"><input id="f-tax" type="text" inputmode="decimal" placeholder="6.875"><span class="suffix">%</span></div>
-        </div>
-      </div>
 
-      <div style="margin-top:10px">
+        <div style="margin-top:10px">
+          <div class="grid-2">
+            <div class="field">
+              <label>Money factor <button class="help-btn" data-help="mf">?</button></label>
+              <div class="input-wrap linked"><input id="f-mf" type="text" inputmode="decimal" placeholder="0.00150"></div>
+            </div>
+            <div class="field">
+              <label>APR <button class="help-btn" data-help="apr">?</button></label>
+              <div class="input-wrap linked"><input id="f-apr" type="text" inputmode="decimal" placeholder="3.60"><span class="suffix">%</span></div>
+            </div>
+          </div>
+          <div class="sync-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            <span>Edit either — the other auto-updates (MF × 2400 = APR)</span>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:6px">
+          <div class="field">
+            <label>Residual % <button class="help-btn" data-help="residual">?</button></label>
+            <div class="input-wrap"><input id="f-resid" type="text" inputmode="decimal" placeholder="58"><span class="suffix">%</span></div>
+            <div class="hint">% of MSRP</div>
+          </div>
+          <div class="field">
+            <label>Buyout amount</label>
+            <div class="input-wrap readonly has-prefix"><span class="prefix">$</span><input id="f-buyout-display" type="text" readonly tabindex="-1" placeholder="—"></div>
+            <div class="hint">= MSRP × residual %</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subtab-pane" data-sub="cash">
+      <div class="card">
         <div class="grid-2">
           <div class="field">
-            <label>Money factor <button class="help-btn" data-help="mf">?</button></label>
-            <div class="input-wrap linked"><input id="f-mf" type="text" inputmode="decimal" placeholder="0.00150"></div>
+            <label>Down payment <button class="help-btn" data-help="down">?</button></label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-down" type="text" inputmode="decimal" placeholder="0"></div>
           </div>
           <div class="field">
-            <label>APR <button class="help-btn" data-help="apr">?</button></label>
-            <div class="input-wrap linked"><input id="f-apr" type="text" inputmode="decimal" placeholder="3.60"><span class="suffix">%</span></div>
+            <label>Trade equity</label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-trade" type="text" inputmode="decimal" placeholder="0"></div>
           </div>
         </div>
-        <div class="sync-row">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-          <span>Edit either — the other auto-updates (MF × 2400 = APR)</span>
+        <div class="grid-2" style="margin-top:8px">
+          <div class="field">
+            <label>Rebates / incentives</label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-rebate" type="text" inputmode="decimal" placeholder="0"></div>
+          </div>
+          <div class="field">
+            <label>Acquisition fee <button class="help-btn" data-help="acq">?</button></label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-acq" type="text" inputmode="decimal" placeholder="695"></div>
+          </div>
         </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:6px">
-        <div class="field">
-          <label>Residual % <button class="help-btn" data-help="residual">?</button></label>
-          <div class="input-wrap"><input id="f-resid" type="text" inputmode="decimal" placeholder="58"><span class="suffix">%</span></div>
-          <div class="hint">% of MSRP</div>
-        </div>
-        <div class="field">
-          <label>Buyout amount</label>
-          <div class="input-wrap readonly has-prefix"><span class="prefix">$</span><input id="f-buyout-display" type="text" readonly tabindex="-1" placeholder="—"></div>
-          <div class="hint">= MSRP × residual %</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="section-row">
-        <div class="section-title">Drive-off / cash</div>
-        <div class="section-meta">step 3</div>
-      </div>
-      <div class="grid-2">
-        <div class="field">
-          <label>Down payment <button class="help-btn" data-help="down">?</button></label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-down" type="text" inputmode="decimal" placeholder="0"></div>
-        </div>
-        <div class="field">
-          <label>Trade equity</label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-trade" type="text" inputmode="decimal" placeholder="0"></div>
-        </div>
-      </div>
-      <div class="grid-2" style="margin-top:8px">
-        <div class="field">
-          <label>Rebates / incentives</label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-rebate" type="text" inputmode="decimal" placeholder="0"></div>
-        </div>
-        <div class="field">
-          <label>Acquisition fee <button class="help-btn" data-help="acq">?</button></label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-acq" type="text" inputmode="decimal" placeholder="695"></div>
-        </div>
-      </div>
-      <div class="grid-2" style="margin-top:8px">
-        <div class="field">
-          <label>Doc / dealer fees</label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-doc" type="text" inputmode="decimal" placeholder="299"></div>
-        </div>
-        <div class="field">
-          <label>Registration / title</label>
-          <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-reg" type="text" inputmode="decimal" placeholder="350"></div>
+        <div class="grid-2" style="margin-top:8px">
+          <div class="field">
+            <label>Doc / dealer fees</label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-doc" type="text" inputmode="decimal" placeholder="299"></div>
+          </div>
+          <div class="field">
+            <label>Registration / title</label>
+            <div class="input-wrap has-prefix"><span class="prefix">$</span><input id="f-reg" type="text" inputmode="decimal" placeholder="350"></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="section-row">
-        <div class="section-title">Total cost of this lease</div>
-        <div class="section-meta">over the term</div>
+    <div class="subtab-pane" data-sub="review">
+      <div class="card">
+        <div class="section-row">
+          <div class="section-title">Total cost over the term</div>
+          <div class="section-meta">no overage</div>
+        </div>
+        <div>
+          <div class="detail-row"><span class="k">Monthly × term</span><span class="v" id="tc-monthly">—</span></div>
+          <div class="detail-row"><span class="k">Down payment</span><span class="v" id="tc-down">—</span></div>
+          <div class="detail-row"><span class="k">Drive-off fees</span><span class="v" id="tc-driveoff">—</span></div>
+          <div class="detail-row"><span class="k">Disposition fee (end of lease)</span><span class="v" id="tc-disp">—</span></div>
+          <div class="detail-row total-row"><span>Total cost</span><span id="tc-total">—</span></div>
+        </div>
       </div>
-      <div>
-        <div class="detail-row"><span class="k">Monthly × term</span><span class="v" id="tc-monthly">—</span></div>
-        <div class="detail-row"><span class="k">Down payment</span><span class="v" id="tc-down">—</span></div>
-        <div class="detail-row"><span class="k">Drive-off fees</span><span class="v" id="tc-driveoff">—</span></div>
-        <div class="detail-row"><span class="k">Disposition fee (end of lease)</span><span class="v" id="tc-disp">—</span></div>
-        <div class="detail-row total-row"><span>Total cost (no overage)</span><span id="tc-total">—</span></div>
-      </div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-primary" id="btn-save">Save this offer</button>
-      <button class="btn btn-ghost" id="btn-clear">Clear</button>
-    </div>
-    <div class="footer-actions">
-      <button class="link-btn" id="btn-load-sample">Load example numbers</button>
+      <p class="hint" style="margin-top:10px; text-align:center">Tap <b>Save offer</b> below to keep this quote and start a fresh one.</p>
     </div>
   </section>
 
@@ -664,6 +733,14 @@
     </button>
   </div>
 </nav>
+
+<!-- Floating Save / Clear bar — shown only on the Calculator tab -->
+<div class="calc-actions" id="calc-actions">
+  <div class="calc-actions-inner">
+    <button class="btn btn-primary" id="btn-save">Save offer</button>
+    <button class="btn btn-ghost" id="btn-clear">Clear</button>
+  </div>
+</div>
 
 <!-- Help modal -->
 <div class="modal-bg" id="modal-bg">
@@ -778,6 +855,7 @@ document.querySelectorAll(".help-btn").forEach((b) => {
 function selectTab(name) {
   document.querySelectorAll(".tab-pane").forEach(p => p.classList.toggle("active", p.id === "tab-" + name));
   document.querySelectorAll(".bn-btn").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === name ? "true" : "false"));
+  document.body.classList.toggle("calc-active", name === "calc");
   if (name === "offers") renderOffers();
   if (name === "check") renderProgressTab();
   window.scrollTo(0, 0);
@@ -803,6 +881,48 @@ function syncMfFromApr() {
 }
 $("f-mf").addEventListener("input", () => { syncAprFromMf(); recompute(); });
 $("f-apr").addEventListener("input", () => { syncMfFromApr(); recompute(); });
+
+// === Sub-tab system ===
+const KEY_SUBTAB = "ldc.subtab.v1";
+const SUBTABS = ["vehicle", "terms", "cash", "review"];
+const SUBTAB_FIELDS = {
+  vehicle: ["f-name", "f-dealer", "f-msrp", "f-sell"],
+  terms:   ["f-tax", "f-mf", "f-apr", "f-resid"],
+  cash:    ["f-down", "f-trade", "f-rebate", "f-acq", "f-doc", "f-reg"]
+};
+
+function selectSubtab(name) {
+  if (!SUBTABS.includes(name)) name = "vehicle";
+  document.querySelectorAll(".subtab").forEach(b => b.classList.toggle("active", b.dataset.sub === name));
+  document.querySelectorAll(".subtab-pane").forEach(p => p.classList.toggle("active", p.dataset.sub === name));
+  saveJSON(KEY_SUBTAB, name);
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+document.querySelectorAll(".subtab").forEach(b => {
+  b.addEventListener("click", () => selectSubtab(b.dataset.sub));
+});
+
+function isFieldFilled(id) {
+  const el = $(id);
+  if (!el) return false;
+  const v = (el.value || "").trim();
+  if (!v) return false;
+  if (id === "f-name" || id === "f-dealer") return true;
+  return parseNum(v) > 0;
+}
+
+function updateSubtabDots() {
+  for (const sub of ["vehicle", "terms", "cash"]) {
+    const filled = SUBTAB_FIELDS[sub].some(isFieldFilled);
+    const btn = document.querySelector(`.subtab[data-sub="${sub}"]`);
+    if (!btn) continue;
+    const dot = btn.querySelector(".dot");
+    if (!dot) continue;
+    if (filled) dot.removeAttribute("hidden");
+    else dot.setAttribute("hidden", "");
+  }
+}
 
 function readForm() {
   return {
@@ -894,6 +1014,8 @@ function recompute() {
   } else {
     $("discount-hint").textContent = "—";
   }
+
+  updateSubtabDots();
 }
 
 FIELDS.forEach(id => {
@@ -994,7 +1116,7 @@ function renderOffers() {
     list.innerHTML = `<div class="card empty">
       <div class="ico">🚗</div>
       <div style="font-weight:600;color:var(--ink)">No offers saved yet</div>
-      <div style="margin-top:4px;font-size:13px">Use the calculator to enter a quote, then tap <b>Save this offer</b>.</div>
+      <div style="margin-top:4px;font-size:13px">Use the calculator to enter a quote, then tap <b>Save offer</b>.</div>
     </div>`;
     return;
   }
@@ -1233,6 +1355,7 @@ if (draft && Object.keys(draft).length) {
 recompute();
 renderProgressTab();
 renderOffers();
+selectSubtab(loadJSON(KEY_SUBTAB, "vehicle"));
 </script>
 </body>
 </html>
