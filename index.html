@@ -1,4 +1,5 @@
-<!doctype html><script type="application/json" id="cowork-artifact-meta">
+<!doctype html>
+<script type="application/json" id="cowork-artifact-meta">
 {
   "name": "Lease Deal Companion",
   "schemaVersion": 1,
@@ -31,26 +32,19 @@
     --radius-sm: 10px;
   }
   * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    overflow-x: clip;
-  }
+  html, body { margin: 0; padding: 0; overflow-x: clip; }
   body {
     font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: var(--ink);
-    background: var(--bg);
+    color: var(--ink); background: var(--bg);
     -webkit-text-size-adjust: 100%;
     padding-bottom: 76px;
   }
   .app {
-    max-width: 480px;
-    margin: 0 auto;
+    max-width: 480px; margin: 0 auto;
     padding: 12px max(14px, env(safe-area-inset-right)) 24px max(14px, env(safe-area-inset-left));
     min-width: 0;
   }
-  header.top {
-    padding: 10px 0 14px;
-  }
+  header.top { padding: 10px 0 14px; }
   .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .brand-logo {
     width: 32px; height: 32px; border-radius: 9px;
@@ -67,8 +61,7 @@
     background: var(--card); border: 1px solid var(--line);
     border-radius: var(--radius); box-shadow: var(--shadow);
     padding: 14px; margin-top: 12px;
-    min-width: 0;
-    overflow: hidden;
+    min-width: 0; overflow: hidden;
   }
   .card h2 {
     margin: 0 0 4px; font-size: 14px; letter-spacing: .02em;
@@ -77,10 +70,7 @@
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
-  .field {
-    display: flex; flex-direction: column; gap: 4px;
-    min-width: 0;
-  }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
   .field label {
     font-size: 12px; color: var(--muted); font-weight: 600;
     display: flex; align-items: center; justify-content: space-between;
@@ -95,9 +85,7 @@
     background: #f9fafb; border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     transition: border-color .12s, background .12s;
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
+    min-width: 0; max-width: 100%; overflow: hidden;
   }
   .input-wrap:focus-within {
     border-color: var(--accent); background: #fff;
@@ -161,14 +149,12 @@
     border: 1px solid var(--line); border-radius: var(--radius);
     padding: 12px; background: #fff;
     margin-bottom: 10px; position: relative;
-    min-width: 0;
-    overflow: hidden;
+    min-width: 0; overflow: hidden;
   }
   .offer-card.best { border-color: var(--good); box-shadow: 0 0 0 2px rgba(10,138,74,.12); }
   .offer-head {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    margin-bottom: 8px;
-    min-width: 0;
+    margin-bottom: 8px; min-width: 0;
   }
   .offer-head > div { min-width: 0; }
   .offer-name {
@@ -198,37 +184,23 @@
   }
   .offer-actions .btn { padding: 8px 10px; font-size: 12px; flex: 1 1 0; min-width: 0; }
 
-  .mini-progress {
-    margin-top: 8px; display: flex; align-items: center; gap: 8px;
-    min-width: 0;
-  }
-  .mini-progress .bar {
-    flex: 1 1 auto; min-width: 0;
-    height: 6px; background: #eef0f4; border-radius: 999px; overflow: hidden;
-  }
-  .mini-progress .fill {
-    height: 100%; background: linear-gradient(90deg, #1e6fff, #5b3df2);
-    transition: width .25s ease;
-  }
+  .mini-progress { margin-top: 8px; display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .mini-progress .bar { flex: 1 1 auto; min-width: 0; height: 6px; background: #eef0f4; border-radius: 999px; overflow: hidden; }
+  .mini-progress .fill { height: 100%; background: linear-gradient(90deg, #1e6fff, #5b3df2); transition: width .25s ease; }
   .mini-progress.complete .fill { background: var(--good); }
   .mini-progress .label {
     font-size: 11px; color: var(--muted); font-weight: 700; min-width: 38px; text-align: right;
-    font-variant-numeric: tabular-nums;
-    flex-shrink: 0;
+    font-variant-numeric: tabular-nums; flex-shrink: 0;
   }
   .mini-progress.complete .label { color: var(--good); }
 
-  .empty {
-    text-align: center; padding: 28px 16px; color: var(--muted);
-  }
+  .empty { text-align: center; padding: 28px 16px; color: var(--muted); }
   .empty .ico { font-size: 36px; opacity: .5; margin-bottom: 6px; }
 
   .progress-card { padding: 0; overflow: hidden; }
   .progress-head {
     display: flex; justify-content: space-between; align-items: center; gap: 10px;
-    padding: 14px; cursor: pointer;
-    transition: background .12s;
-    min-width: 0;
+    padding: 14px; cursor: pointer; transition: background .12s; min-width: 0;
   }
   .progress-head:hover { background: #fafbfc; }
   .progress-head > div:first-child { min-width: 0; flex: 1 1 auto; }
@@ -236,35 +208,16 @@
     color: var(--muted); font-size: 12px; margin-top: 2px;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .progress-head .right {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-    flex-shrink: 0;
-  }
-  .progress-head .count {
-    font-weight: 800; font-size: 16px; font-variant-numeric: tabular-nums;
-  }
+  .progress-head .right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+  .progress-head .count { font-weight: 800; font-size: 16px; font-variant-numeric: tabular-nums; }
   .progress-head .count.complete { color: var(--good); }
-  .progress-head .chev {
-    color: var(--muted); transition: transform .2s;
-    margin-left: 4px;
-  }
+  .progress-head .chev { color: var(--muted); transition: transform .2s; margin-left: 4px; }
   .progress-card.expanded .progress-head .chev { transform: rotate(90deg); }
   .progress-bar-row { padding: 0 14px 12px; }
-  .progress-bar {
-    height: 8px; background: #eef0f4; border-radius: 999px; overflow: hidden;
-  }
-  .progress-bar .fill {
-    height: 100%; background: linear-gradient(90deg, #1e6fff, #5b3df2);
-    transition: width .25s ease;
-    border-radius: 999px;
-  }
+  .progress-bar { height: 8px; background: #eef0f4; border-radius: 999px; overflow: hidden; }
+  .progress-bar .fill { height: 100%; background: linear-gradient(90deg, #1e6fff, #5b3df2); transition: width .25s ease; border-radius: 999px; }
   .progress-bar.complete .fill { background: var(--good); }
-  .progress-body {
-    padding: 4px 14px 14px;
-    border-top: 1px solid var(--line);
-    background: #fafbfc;
-    display: none;
-  }
+  .progress-body { padding: 4px 14px 14px; border-top: 1px solid var(--line); background: #fafbfc; display: none; }
   .progress-card.expanded .progress-body { display: block; }
 
   .check-section { margin-top: 12px; }
@@ -277,30 +230,23 @@
     display: flex; align-items: flex-start; gap: 10px;
     padding: 9px 11px; border: 1px solid var(--line); border-radius: var(--radius-sm);
     background: #fff; margin-bottom: 6px; cursor: pointer;
-    transition: background .12s, border-color .12s;
-    min-width: 0;
+    transition: background .12s, border-color .12s; min-width: 0;
   }
   .check-item.done { background: #f0fdf4; border-color: #bbf7d0; }
   .check-item .box {
     width: 22px; height: 22px; border-radius: 6px;
     border: 2px solid var(--line-strong); flex-shrink: 0;
-    display: grid; place-items: center;
-    margin-top: 1px;
+    display: grid; place-items: center; margin-top: 1px;
     transition: background .12s, border-color .12s;
   }
   .check-item.done .box { background: var(--good); border-color: var(--good); }
-  .check-item.done .box::after {
-    content: "✓"; color: white; font-weight: 800; font-size: 13px;
-  }
+  .check-item.done .box::after { content: "✓"; color: white; font-weight: 800; font-size: 13px; }
   .check-item .body { flex: 1 1 auto; min-width: 0; }
   .check-item .ttl { font-weight: 600; font-size: 13.5px; line-height: 1.3; }
   .check-item .sub { color: var(--muted); font-size: 12px; margin-top: 2px; line-height: 1.35; }
   .check-item.done .ttl { text-decoration: line-through; opacity: .7; }
 
-  .reset-row {
-    display: flex; justify-content: flex-end; padding-top: 10px; margin-top: 6px;
-    border-top: 1px dashed var(--line);
-  }
+  .reset-row { display: flex; justify-content: flex-end; padding-top: 10px; margin-top: 6px; border-top: 1px dashed var(--line); }
   .reset-row .link-btn { padding: 0; }
 
   .gloss-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -317,10 +263,7 @@
     padding: 6px max(env(safe-area-inset-left), 8px) calc(6px + env(safe-area-inset-bottom)) max(env(safe-area-inset-right), 8px);
     z-index: 30;
   }
-  .bn-inner {
-    max-width: 480px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;
-  }
+  .bn-inner { max-width: 480px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
   .bn-btn {
     appearance: none; border: 0; background: transparent;
     display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -398,43 +341,29 @@
   .sticky-top-group {
     position: sticky; top: 0; z-index: 20;
     background: var(--bg);
-    padding: 8px 0 6px;
-    margin-top: -8px;
+    padding: 8px 0 6px; margin-top: -8px;
   }
   .subtabs {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 4px;
-    background: #e5e7eb;
-    padding: 4px;
-    border-radius: 12px;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;
+    background: #e5e7eb; padding: 4px; border-radius: 12px;
     margin-top: 10px;
   }
   .subtab {
     appearance: none; border: 0; background: transparent;
-    padding: 8px 4px;
-    border-radius: 8px;
+    padding: 8px 4px; border-radius: 8px;
     font: inherit; font-weight: 600; font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-    position: relative;
-    min-width: 0;
+    color: var(--muted); cursor: pointer; position: relative; min-width: 0;
     transition: background .12s, color .12s, box-shadow .12s, transform .05s;
     display: flex; align-items: center; justify-content: center; gap: 5px;
   }
   .subtab:active { transform: scale(.97); }
   .subtab.active {
-    background: #fff;
-    color: var(--ink);
+    background: #fff; color: var(--ink);
     box-shadow: 0 1px 3px rgba(15,23,42,.08), 0 1px 1px rgba(15,23,42,.04);
   }
   .subtab .dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--good);
-    flex-shrink: 0;
-    box-shadow: 0 0 0 2px #fff;
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--good); flex-shrink: 0; box-shadow: 0 0 0 2px #fff;
   }
   .subtab:not(.active) .dot { box-shadow: 0 0 0 2px #e5e7eb; }
   .subtab .dot[hidden] { display: none; }
@@ -444,35 +373,68 @@
 
   /* Floating Save / Clear bar — visible only when the Calculator tab is active. */
   .calc-actions {
-    display: none;
-    position: fixed;
-    left: 0; right: 0;
-    bottom: calc(58px + env(safe-area-inset-bottom));
+    display: none; position: fixed;
+    left: 0; right: 0; bottom: calc(58px + env(safe-area-inset-bottom));
     padding: 0 max(14px, env(safe-area-inset-left));
     padding-right: max(14px, env(safe-area-inset-right));
-    z-index: 25;
-    pointer-events: none;
+    z-index: 25; pointer-events: none;
   }
   body.calc-active .calc-actions { display: block; }
   body.calc-active { padding-bottom: 140px; }
   .calc-actions::before {
-    content: '';
-    position: absolute;
-    inset: -28px 0 -8px 0;
+    content: ''; position: absolute; inset: -28px 0 -8px 0;
     background: linear-gradient(to top, var(--bg) 35%, rgba(245,246,248,0));
-    pointer-events: none;
-    z-index: -1;
+    pointer-events: none; z-index: -1;
   }
-  .calc-actions-inner {
-    pointer-events: auto;
-    max-width: 480px; margin: 0 auto;
-    display: flex; gap: 8px;
-  }
-  .calc-actions .btn {
-    flex: 1 1 0; min-width: 0;
-  }
+  .calc-actions-inner { pointer-events: auto; max-width: 480px; margin: 0 auto; display: flex; gap: 8px; }
+  .calc-actions .btn { flex: 1 1 0; min-width: 0; }
   .calc-actions .btn-primary { box-shadow: 0 8px 22px rgba(30,111,255,.35); }
   .calc-actions .btn-ghost { box-shadow: 0 6px 16px rgba(15,23,42,.10); }
+
+  /* === Smart Insights card on the Review tab === */
+  .insights-card { border-width: 1px; border-style: solid; transition: background .2s, border-color .2s; }
+  .insights-card.insights-empty { background: #fff; border-color: var(--line); }
+  .insights-card.insights-good  { background: #f0fdf4; border-color: #bbf7d0; }
+  .insights-card.insights-warn  { background: #fffbeb; border-color: #fde68a; }
+  .insights-card.insights-bad   { background: #fef2f2; border-color: #fecaca; }
+  .insights-empty-msg {
+    color: var(--muted); font-size: 13px; line-height: 1.5; text-align: center;
+    padding: 6px 0;
+  }
+  .insights-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .insights-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 18px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .insights-good .insights-icon { background: var(--good); }
+  .insights-warn .insights-icon { background: var(--warn); }
+  .insights-bad  .insights-icon { background: var(--bad); }
+  .insights-verdict { font-weight: 800; font-size: 15.5px; letter-spacing: -.01em; line-height: 1.2; }
+  .insights-good .insights-verdict { color: #166534; }
+  .insights-warn .insights-verdict { color: #92400e; }
+  .insights-bad  .insights-verdict { color: #991b1b; }
+  .insights-sub {
+    font-size: 11px; color: var(--muted); margin-top: 2px;
+    text-transform: uppercase; letter-spacing: .04em; font-weight: 600;
+  }
+  .insights-list { display: flex; flex-direction: column; gap: 6px; }
+  .insights-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 12.5px; line-height: 1.45;
+    padding: 9px 11px; background: rgba(255,255,255,.7);
+    border-radius: 9px; color: var(--ink);
+  }
+  .insights-item .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .insights-item.item-bad  .dot { background: var(--bad); }
+  .insights-item.item-warn .dot { background: var(--warn); }
+  .insights-item.item-good .dot { background: var(--good); }
+  .insights-item b { font-weight: 700; }
+  .insights-disclaimer {
+    color: var(--muted); font-size: 10.5px; line-height: 1.4;
+    margin-top: 8px; text-align: center;
+    text-transform: uppercase; letter-spacing: .04em; font-weight: 600;
+  }
 </style>
 </head>
 <body class="calc-active">
@@ -658,6 +620,9 @@
           <div class="detail-row total-row"><span>Total cost</span><span id="tc-total">—</span></div>
         </div>
       </div>
+      <div class="card insights-card insights-empty" id="insights-card">
+        <div class="insights-empty-msg">Fill in MSRP, sell price, MF/APR, and residual to see a quick deal analysis.</div>
+      </div>
       <p class="hint" style="margin-top:10px; text-align:center">Tap <b>Save offer</b> below to keep this quote and start a fresh one.</p>
     </div>
   </section>
@@ -791,50 +756,17 @@ offers.forEach(o => { if (!o.checklist) o.checklist = {}; });
 const expandedOffers = new Set();
 
 const HELP = {
-  msrp: {
-    t: "MSRP (Sticker price)",
-    b: "The Manufacturer's Suggested Retail Price as printed on the window sticker. The residual percentage is calculated against MSRP, not the selling price — so it matters even when you negotiate the price down."
-  },
-  sellingPrice: {
-    t: "Selling price (Cap Cost)",
-    b: "What you actually agreed to pay for the car before fees. This is what you negotiate. Don't let the dealer focus only on the monthly payment — always pin down the selling price first."
-  },
-  term: {
-    t: "Term (length of lease)",
-    b: "Most leases are 36 months. 24-month leases often have higher residuals and can be cheaper-per-month than they look. Avoid going beyond the warranty (typically 36 mo)."
-  },
-  miles: {
-    t: "Annual mileage allowance",
-    b: "10,000 mi/yr is standard. Going higher reduces the residual and raises the payment slightly. Buying miles up front (~$0.10–0.15/mi) is cheaper than paying overage at lease-end ($0.20–0.30/mi)."
-  },
-  tax: {
-    t: "Sales tax %",
-    b: "In most US states tax is applied to the monthly payment (the math here matches that). A few states tax the full sale price up front — if so, ask the dealer to add it as a fee or build it into cap cost."
-  },
-  mf: {
-    t: "Money factor",
-    b: "The lease's interest rate, expressed as a tiny decimal like 0.00150. Multiply by 2400 to get the equivalent APR. Always ask for the BUY RATE — dealers can mark this up by ~0.0004 (≈ 1% APR) for extra profit. If the dealer quoted you APR instead, type it into the APR field and the money factor will fill in automatically."
-  },
-  apr: {
-    t: "APR (Annual Percentage Rate)",
-    b: "The interest rate as a regular percentage. Captive lenders publish lease programs in money factor, but some salespeople will quote APR. Either is fine — type it in either field and the other auto-syncs. Math: APR ÷ 2400 = Money Factor, so 3.6% APR ≈ 0.00150 MF."
-  },
-  residual: {
-    t: "Residual value %",
-    b: "What the bank says the car will be worth at lease-end, as a % of MSRP. Set by the captive lender — NOT negotiable. Higher residual = lower depreciation = lower payment. Verify the dealer is using the correct posted residual."
-  },
-  down: {
-    t: "Down payment (Cap Cost Reduction)",
-    b: "Most experienced lessees recommend $0 down — if the car is totaled, the insurance pays the bank, not you. Pay first month + fees only, and let the monthly be slightly higher."
-  },
-  acq: {
-    t: "Acquisition fee (bank fee)",
-    b: "Charged by the captive lender to set up the lease. Typically $595–$995. NOT negotiable, but it should be the same across all dealers using that lender."
-  },
-  nickname: {
-    t: "Nickname",
-    b: "Used to label the offer in your saved list. e.g. 'Honda CR-V — 36mo' or 'Hudson Toyota'."
-  }
+  msrp: { t: "MSRP (Sticker price)", b: "The Manufacturer's Suggested Retail Price as printed on the window sticker. The residual percentage is calculated against MSRP, not the selling price — so it matters even when you negotiate the price down." },
+  sellingPrice: { t: "Selling price (Cap Cost)", b: "What you actually agreed to pay for the car before fees. This is what you negotiate. Don't let the dealer focus only on the monthly payment — always pin down the selling price first." },
+  term: { t: "Term (length of lease)", b: "Most leases are 36 months. 24-month leases often have higher residuals and can be cheaper-per-month than they look. Avoid going beyond the warranty (typically 36 mo)." },
+  miles: { t: "Annual mileage allowance", b: "10,000 mi/yr is standard. Going higher reduces the residual and raises the payment slightly. Buying miles up front (~$0.10–0.15/mi) is cheaper than paying overage at lease-end ($0.20–0.30/mi)." },
+  tax: { t: "Sales tax %", b: "In most US states tax is applied to the monthly payment (the math here matches that). A few states tax the full sale price up front — if so, ask the dealer to add it as a fee or build it into cap cost." },
+  mf: { t: "Money factor", b: "The lease's interest rate, expressed as a tiny decimal like 0.00150. Multiply by 2400 to get the equivalent APR. Always ask for the BUY RATE — dealers can mark this up by ~0.0004 (≈ 1% APR) for extra profit. If the dealer quoted you APR instead, type it into the APR field and the money factor will fill in automatically." },
+  apr: { t: "APR (Annual Percentage Rate)", b: "The interest rate as a regular percentage. Captive lenders publish lease programs in money factor, but some salespeople will quote APR. Either is fine — type it in either field and the other auto-syncs. Math: APR ÷ 2400 = Money Factor, so 3.6% APR ≈ 0.00150 MF." },
+  residual: { t: "Residual value %", b: "What the bank says the car will be worth at lease-end, as a % of MSRP. Set by the captive lender — NOT negotiable. Higher residual = lower depreciation = lower payment. Verify the dealer is using the correct posted residual." },
+  down: { t: "Down payment (Cap Cost Reduction)", b: "Most experienced lessees recommend $0 down — if the car is totaled, the insurance pays the bank, not you. Pay first month + fees only, and let the monthly be slightly higher." },
+  acq: { t: "Acquisition fee (bank fee)", b: "Charged by the captive lender to set up the lease. Typically $595–$995. NOT negotiable, but it should be the same across all dealers using that lender." },
+  nickname: { t: "Nickname", b: "Used to label the offer in your saved list. e.g. 'Honda CR-V — 36mo' or 'Hudson Toyota'." }
 };
 
 function showHelp(id) {
@@ -924,6 +856,106 @@ function updateSubtabDots() {
   }
 }
 
+// === Smart Insights (rule-based) ===
+function analyzeDeal(d) {
+  const items = [];
+  if (d.msrp > 0 && d.sell > 0) {
+    const offAmt = d.msrp - d.sell;
+    const pctOff = (offAmt / d.msrp) * 100;
+    if (d.sell > d.msrp) {
+      items.push({ level: "bad", msg: `Selling <b>above MSRP</b> by ${fmtMoney(d.sell - d.msrp)} — push back unless this is a rare/in-demand vehicle.` });
+    } else if (pctOff < 2) {
+      items.push({ level: "warn", msg: `Only <b>${pctOff.toFixed(1)}% off MSRP</b>. Most decent leases negotiate 5%+ off.` });
+    } else if (pctOff >= 8) {
+      items.push({ level: "good", msg: `<b>${pctOff.toFixed(1)}% off MSRP</b> (${fmtMoney(offAmt)}) — strong discount.` });
+    } else if (pctOff >= 5) {
+      items.push({ level: "good", msg: `<b>${pctOff.toFixed(1)}% off MSRP</b> (${fmtMoney(offAmt)}) — solid discount.` });
+    }
+  }
+  if (d.mf > 0) {
+    const apr = d.mf * 2400;
+    if (apr > 8) {
+      items.push({ level: "bad", msg: `<b>${apr.toFixed(2)}% APR</b> is very high — likely marked up. Ask for the unmarked buy rate.` });
+    } else if (apr > 7) {
+      items.push({ level: "warn", msg: `<b>${apr.toFixed(2)}% APR</b> is on the high side — confirm this is the buy rate, not a markup.` });
+    } else if (apr < 3 && apr > 0) {
+      items.push({ level: "good", msg: `<b>${apr.toFixed(2)}% APR</b> — excellent lease rate.` });
+    }
+  }
+  if (d.down >= 1) {
+    items.push({ level: "warn", msg: `<b>${fmtMoney(d.down)} down</b>. Pros recommend $0 — if the car is totaled, that money goes to the bank, not you.` });
+  }
+  if (d.acq > 1100) {
+    items.push({ level: "warn", msg: `<b>${fmtMoney(d.acq)} acquisition fee</b> is high — typical range is $595–$995.` });
+  }
+  if (d.doc > 600) {
+    items.push({ level: "warn", msg: `<b>${fmtMoney(d.doc)} doc fee</b> is steep. Some states cap this — check yours.` });
+  }
+  if (d.resid > 0 && d.resid < 50) {
+    items.push({ level: "warn", msg: `<b>${d.resid}% residual</b> is on the low side — verify against the bank's posted program.` });
+  } else if (d.resid >= 65) {
+    items.push({ level: "good", msg: `<b>${d.resid}% residual</b> — high residual keeps your monthly payment low.` });
+  }
+  if (d.term > 39) {
+    items.push({ level: "warn", msg: `<b>${d.term}-month term</b> goes beyond typical 36-mo bumper-to-bumper warranty.` });
+  }
+  return items;
+}
+
+function renderInsights() {
+  const card = $("insights-card");
+  if (!card) return;
+  const d = readForm();
+  const items = analyzeDeal(d);
+  const hasBasics = d.msrp > 0 && d.sell > 0 && d.mf > 0 && d.resid > 0;
+  if (!hasBasics || items.length === 0) {
+    card.className = "card insights-card insights-empty";
+    card.innerHTML = `<div class="insights-empty-msg">Fill in MSRP, sell price, MF/APR, and residual to see a quick deal analysis.</div>`;
+    return;
+  }
+  const counts = {
+    bad:  items.filter(i => i.level === "bad").length,
+    warn: items.filter(i => i.level === "warn").length,
+    good: items.filter(i => i.level === "good").length,
+  };
+  let level, verdict, sub;
+  if (counts.bad > 0) {
+    level = "bad"; verdict = "Red flags";
+    sub = `${counts.bad} red flag${counts.bad !== 1 ? "s" : ""}` + (counts.warn ? `, ${counts.warn} to negotiate` : "");
+  } else if (counts.warn > 0) {
+    level = "warn"; verdict = "Room to negotiate";
+    sub = `${counts.warn} item${counts.warn !== 1 ? "s" : ""} to push back on` + (counts.good ? `, ${counts.good} positive signal${counts.good !== 1 ? "s" : ""}` : "");
+  } else {
+    level = "good"; verdict = "Looks solid";
+    sub = `${counts.good} positive signal${counts.good !== 1 ? "s" : ""}, no flags`;
+  }
+  const sorted = [
+    ...items.filter(i => i.level === "bad"),
+    ...items.filter(i => i.level === "warn"),
+    ...items.filter(i => i.level === "good"),
+  ].slice(0, 4);
+  const ICON = { good: "✓", warn: "!", bad: "⚠" };
+  card.className = `card insights-card insights-${level}`;
+  card.innerHTML = `
+    <div class="insights-header">
+      <div class="insights-icon">${ICON[level]}</div>
+      <div>
+        <div class="insights-verdict">${verdict}</div>
+        <div class="insights-sub">${sub}</div>
+      </div>
+    </div>
+    <div class="insights-list">
+      ${sorted.map(item => `
+        <div class="insights-item item-${item.level}">
+          <span class="dot"></span>
+          <span>${item.msg}</span>
+        </div>
+      `).join("")}
+    </div>
+    <div class="insights-disclaimer">Quick rules-of-thumb · always do your own homework</div>
+  `;
+}
+
 function readForm() {
   return {
     name: $("f-name").value.trim(),
@@ -976,7 +1008,6 @@ function compute(d) {
   const totalMonthly = monthly * d.term;
   const totalCost = totalMonthly + d.down + d.doc + d.reg + dispositionFee;
   const discount = d.msrp > 0 ? ((d.msrp - d.sell) / d.msrp) * 100 : 0;
-
   return { residualValue, adjCap, depreciation, rentCharge, preTax, taxAmt, monthly, apr,
     dispositionFee, totalMonthly, totalCost, discount };
 }
@@ -984,25 +1015,19 @@ function compute(d) {
 function recompute() {
   const d = readForm();
   const r = compute(d);
-
   saveJSON(KEY_DRAFT, d);
-
   $("est-monthly").textContent = isFinite(r.monthly) && r.monthly > 0 ? fmtMoney(r.monthly, 2) : "$—";
   $("est-apr").textContent = d.mf > 0 ? r.apr.toFixed(2) + "%" : "—";
   $("bd-dep").textContent = fmtMoney(r.depreciation, 2);
   $("bd-rent").textContent = fmtMoney(r.rentCharge, 2);
   $("bd-tax").textContent = fmtMoney(r.taxAmt, 2);
-
   $("tc-monthly").textContent = fmtMoney(r.totalMonthly);
   $("tc-down").textContent = fmtMoney(d.down);
   $("tc-driveoff").textContent = fmtMoney(d.doc + d.reg);
   $("tc-disp").textContent = fmtMoney(r.dispositionFee);
   $("tc-total").textContent = fmtMoney(r.totalCost);
-
   $("f-buyout-display").value = (d.msrp > 0 && d.resid > 0)
-    ? r.residualValue.toLocaleString("en-US", { maximumFractionDigits: 0 })
-    : "";
-
+    ? r.residualValue.toLocaleString("en-US", { maximumFractionDigits: 0 }) : "";
   if (d.msrp > 0 && d.sell > 0) {
     if (d.sell > d.msrp) {
       $("discount-hint").innerHTML = `<span style="color:var(--bad)">Selling above MSRP by ${fmtMoney(d.sell - d.msrp)}.</span> Push back unless rare/in-demand.`;
@@ -1014,8 +1039,8 @@ function recompute() {
   } else {
     $("discount-hint").textContent = "—";
   }
-
   updateSubtabDots();
+  renderInsights();
 }
 
 FIELDS.forEach(id => {
@@ -1060,10 +1085,7 @@ $("btn-save").addEventListener("click", () => {
     id: "o_" + Math.random().toString(36).slice(2, 9) + Date.now().toString(36),
     saved: Date.now(),
     ...d,
-    monthly: r.monthly,
-    apr: r.apr,
-    totalCost: r.totalCost,
-    discount: r.discount,
+    monthly: r.monthly, apr: r.apr, totalCost: r.totalCost, discount: r.discount,
     checklist: {}
   };
   offers.unshift(offer);
@@ -1094,17 +1116,13 @@ const CHECKLIST = [
     { id: "purchase-option", t: "Note the buyout / purchase-option price", s: "Should equal residual value + small fee. Useful if values stay strong." }
   ]}
 ];
-
 const TOTAL_ITEMS = CHECKLIST.reduce((acc, s) => acc + s.items.length, 0);
 
 function getProgress(offer) {
   let done = 0;
-  if (offer.checklist) {
-    CHECKLIST.forEach(s => s.items.forEach(i => { if (offer.checklist[i.id]) done++; }));
-  }
+  if (offer.checklist) CHECKLIST.forEach(s => s.items.forEach(i => { if (offer.checklist[i.id]) done++; }));
   return { done, total: TOTAL_ITEMS, pct: TOTAL_ITEMS ? (done/TOTAL_ITEMS)*100 : 0 };
 }
-
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
@@ -1184,7 +1202,6 @@ function renderOffers() {
 
 function renderProgressTab() {
   const root = $("progress-list");
-
   $("stat-offers").textContent = offers.length;
   let totalDone = 0, bestPct = -1, bestName = "—";
   offers.forEach(o => {
@@ -1195,8 +1212,7 @@ function renderProgressTab() {
   $("stat-done").textContent = totalDone;
   $("stat-best").textContent = offers.length === 0 ? "—" : (bestPct > 0 ? Math.round(bestPct) + "%" : "0%");
   $("overall-progress").textContent = offers.length === 0
-    ? "—"
-    : `${totalDone} of ${offers.length * TOTAL_ITEMS} steps`;
+    ? "—" : `${totalDone} of ${offers.length * TOTAL_ITEMS} steps`;
 
   if (offers.length === 0) {
     root.innerHTML = `<div class="card empty">
@@ -1206,7 +1222,6 @@ function renderProgressTab() {
     </div>`;
     return;
   }
-
   root.innerHTML = offers.map(o => {
     const p = getProgress(o);
     const complete = p.done === p.total;
@@ -1259,7 +1274,6 @@ function renderProgressTab() {
       card.classList.toggle("expanded");
     });
   });
-
   root.querySelectorAll(".check-item").forEach(el => {
     el.addEventListener("click", () => {
       const offerId = el.dataset.offerId;
@@ -1278,7 +1292,6 @@ function renderProgressTab() {
       $("overall-progress").textContent = `${td} of ${offers.length * TOTAL_ITEMS} steps`;
     });
   });
-
   root.querySelectorAll("[data-reset-offer]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -1298,7 +1311,6 @@ function updateOfferProgressUI(offerId) {
   if (!offer) return;
   const p = getProgress(offer);
   const complete = p.done === p.total;
-
   const card = document.querySelector(`.progress-card[data-offer="${offerId}"]`);
   if (card) {
     const countEl = card.querySelector(".count");
@@ -1311,7 +1323,6 @@ function updateOfferProgressUI(offerId) {
     const bar = card.querySelector(".progress-bar");
     if (bar) bar.classList.toggle("complete", complete);
   }
-
   const mini = document.querySelector(`.mini-progress[data-mini="${offerId}"]`);
   if (mini) {
     mini.querySelector(".fill").style.width = p.pct + "%";
